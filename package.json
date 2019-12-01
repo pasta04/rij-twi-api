@@ -1,0 +1,16 @@
+{
+  "name": "rij-twi-api",
+  "version": "1.0.0",
+  "description": "RTA in JapanにおけるTwitterクライアントのAPI説明",
+  "scripts": {
+    "debug": "aglio -i api.apib -s -p 3000",
+    "build": "aglio -i api.apib -o docs/index.html",
+    "server": "drakov -f api.apib -p 8000"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aglio": "^2.3.0",
+    "drakov": "^1.0.4"
+  }
+}

@@ -1,0 +1,126 @@
+FORMAT: 1A
+HOST: https://rtain.jp/
+
+# RTA Twitter API
+
+# Group GET
+
+## アカウントのタイムライン取得 [GET /api/twitter/statuses/user_timeline]
+
+* 規定のアカウントのタイムライン(home)を取得する。
+
++ Response 200 (application/json)
+
+  + Attributes
+        + code: 0 (number) 結果コード
+        + data (array[Tweets]) - ツイート
+
++ Response 503 (application/json)
+  + Attributes
+        + code: 10 (number) 結果コード
+        + error (Error) - エラー情報
+
+## アカウントへのメンション取得 [GET /api/twitter/statuses/mentions_timeline]
+
+* 規定のアカウントに対するメンションを取得する。
+
++ Response 200 (application/json)
+
+  + Attributes
+        + code: 0 (number) 結果コード
+        + data (array[Tweets]) - ツイート
+
++ Response 503 (application/json)
+  + Attributes
+        + code: 10 (number) 結果コード
+        + error (Error) - エラー情報
+
+## ハッシュタグ検索 [GET /api/twitter/statuses/hash]
+
+* 規定のハッシュタグで検索した結果を取得する。
+
++ Response 200 (application/json)
+
+  + Attributes
+        + code: 0 (number) 結果コード
+        + data (array[Tweets]) - ツイート
+
++ Response 503 (application/json)
+  + Attributes
+        + code: 10 (number) 結果コード
+        + error (Error) - エラー情報
+
+# Group POST
+
+## ツイート投稿 [POST /api/twitter/statuses/update]
+
+* ツイート投稿する。
+
++ Request (application/json)
+    + Attribute
+        + status: 走者乙ｗｗｗｗｗｗｗｗｗｗｗｗ (string) - ツイート文
+        + media_ids: 710511363345354753 (array[string]) - 画像、動画ファイルのID
+
++ Response 200 (application/json)
+  * ツイート投稿後のタイムラインを返却する。
+
+  + Attributes
+        + code: 0 (number) - 結果コード
+        + data (array[Tweets]) - 投稿後のタイムライン(home)
+
++ Response 503 (application/json)
+  + Attributes
+        + code: 10 (number) - 結果コード
+        + error (Error) - エラー情報
+
+## メディアアップロード [POST /api/twitter/media/upload/]
+* 画像、動画ファイルをアップロードする。
+
++ Request (multipart/form)
+
++ Response 200 (application/json)
+
+  + Attributes
+        + code: 0 (number) - 結果コード
+        + data
+            + media_id_string: 710511363345354753 (string) - メディアファイルのID
+
++ Response 503 (application/json)
+  + Attributes
+        + code: 10 (number) - 結果コード
+        + error (Error) - エラー情報
+
+
+## ツイート削除 [POST /api/twitter/statuses/destroy/{id}]
+
+* 指定したIDのツイートを削除する。
+
++ Parameters
+    + id: 1050118621198921728 (string, required) - ツイートID
+
++ Response 200 (application/json)
+
+  + Attributes
+        + code: 0 (number) - 結果コード
+
++ Response 503 (application/json)
+  + Attributes
+        + code: 10 (number) - 結果コード
+        + error (Error) - エラー情報
+
+
+# Data Structures
+## Error
++ message: なんかエラーがあった (string) - エラーメッセージ
+
+## Tweets
++ id_str: 1050118621198921728 (string) - ツイートID
++ text: ﾃｽﾃｽ (string) - ツイート文
++ user (User) - ツイートしたユーザ情報
+
+## User
++ created_at: Wed Oct 10 20:19:24 +0000 2018 (string) - ツイート時刻
++ id_str: 6253282 (string) - ユーザID
++ name: Twitter API (string) - ユーザ名
++ screen_name: TwitterAPI (string) - @xxxの@が無いやつ
++ profile_image_url_https: https://pbs.twimg.com/profile_images/942858479592554497/BbazLO9L_normal.jpg (string) - アイコン画像のURL
