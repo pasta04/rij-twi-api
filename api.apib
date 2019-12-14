@@ -3,6 +3,12 @@ HOST: https://rtain.jp/
 
 # RTA Twitter API
 
+# Group OPTIONS
+
+## Fetch API共通 [OPTIONS /*]
+
++ Response 200 (application/json)
+
 # Group GET
 
 ## アカウントのタイムライン取得 [GET /api/twitter/statuses/user_timeline]
@@ -76,7 +82,7 @@ HOST: https://rtain.jp/
 ## メディアアップロード [POST /api/twitter/media/upload/]
 * 画像、動画ファイルをアップロードする。
 
-+ Request (multipart/form)
++ Request (multipart/form-data)
 
 + Response 200 (application/json)
 
